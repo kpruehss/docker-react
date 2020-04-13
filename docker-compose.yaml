@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web:
+    # Workaround for bug in create-react-app
+    stdin_open: true
+    # Provide context for the Dockerfile.dev build
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    # Point npm scripts at container's node_module and project for live-update
+    volumes:
+      - /usr/app/node_modules
+      - .:/usr/app
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/app/node_modules
+      - .:/usr/app
+    command: ['npm', 'run', 'test']
