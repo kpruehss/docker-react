@@ -11,13 +11,13 @@ services:
       - '3000:3000'
     # Point npm scripts at container's node_module and project for live-update
     volumes:
-      - /usr/app/node_modules
-      - .:/usr/app
+      - /app/node_modules
+      - .:/app
   test:
     build:
       context: .
       dockerfile: Dockerfile.dev
     volumes:
-      - /usr/app/node_modules
-      - .:/usr/app
+      - /app/node_modules
+      - .:/app
     command: ['npm', 'run', 'test']
